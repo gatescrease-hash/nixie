@@ -1,0 +1,16 @@
+[package]
+name = "nixie-golden"
+description = "Golden-network test harness and gate suites."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[features]
+# Gate 0 suite (ROADMAP.md): `cargo test -p nixie-golden --features gate0`.
+gate0 = []
+
+[lints]
+workspace = true

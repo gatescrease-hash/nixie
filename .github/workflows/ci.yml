@@ -1,0 +1,92 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1   # reads rust-toolchain.toml
+      - run: cargo fmt --all --check
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      # clippy::float_cmp is denied in [workspace.lints]; repeated here so it
+      # cannot be switched off by a crate manifest (ADR-0012).
+      - run: cargo clippy --workspace --all-targets --all-features -- -D warnings -D clippy::float_cmp
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo build --workspace --locked
+      - run: cargo test --workspace --locked
+
+  wasm32:
+    # ADR-0014: the compiler and everything it depends on stays C-free.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo build -p nixie-compiler --target wasm32-unknown-unknown --locked
+
+  licenses:
+    # ADR-0016, ADR-0017: allow-list in deny.toml.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: EmbarkStudios/cargo-deny-action@v2
+        with:
+          command: check licenses
+
+  epsilon:
+    # ADR-0012: no literal epsilons outside nixie-units.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/lint-epsilon.sh
+
+  dco:
+    # ADR-0017: every commit in a PR carries a Signed-off-by line.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check sign-off
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          missing=0
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            if ! git show -s --format=%B "$c" | grep -q '^Signed-off-by: '; then
+              echo "::error::commit $c is missing a DCO sign-off (git commit -s)"
+              missing=1
+            fi
+          done
+          exit $missing
+
+  gate0:
+    # Gate 0 suite (ROADMAP.md). Expected red until the Phase 0 slice lands.
+    # Do NOT add this job to the required status checks in branch protection.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo test -p nixie-golden --features gate0 --locked
