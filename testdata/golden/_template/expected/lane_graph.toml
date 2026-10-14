@@ -1,0 +1,15 @@
+# Lanes per leg, and one connector set per movement. Counts compare exactly.
+# Placeholder values only.
+
+[[leg]]
+junction = "J1"
+leg = "N"
+approach_lanes = 0
+departure_lanes = 0
+
+[[connector_set]]
+junction = "J1"
+approach = "N"
+departure = "S"
+turn = "through"
+connectors = 0

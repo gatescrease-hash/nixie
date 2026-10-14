@@ -1,0 +1,8 @@
+# HCM lane groups per approach, identified by the turns they serve.
+# Placeholder values only.
+
+[[lane_group]]
+junction = "J1"
+approach = "N"
+turns = ["through", "right"]
+lanes = 0

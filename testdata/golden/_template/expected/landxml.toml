@@ -1,0 +1,17 @@
+# Each alignment after LandXML export and re-import: element types, lengths
+# and stations, in order. Lengths and stations in metres.
+# kind: line | arc | clothoid. Placeholder values only.
+
+[[alignment]]
+name = "Main St"
+start_station = { value = 0.0, tol = "OFFSET_CAD" }
+
+[[alignment.element]]
+kind = "line"
+length = { value = 0.0, tol = "OFFSET_CAD" }
+start_station = { value = 0.0, tol = "OFFSET_CAD" }
+
+[[alignment.element]]
+kind = "clothoid"
+length = { value = 0.0, tol = "OFFSET_CAD" }
+start_station = { value = 0.0, tol = "OFFSET_CAD" }
