@@ -1,0 +1,56 @@
+name: Task
+description: One PR's worth of work, ideally inside one crate.
+labels: ["type:task", "blocked"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A good task is small enough for one PR and has acceptance criteria an agent can run. Remove `blocked` and add `ready` once dependencies are closed (the unblock workflow does this automatically).
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: One or two sentences. What exists when this is done?
+    validations: { required: true }
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Links to ADRs, spec sections, parent epic. No pasted essays.
+      value: |
+        - Epic: #
+        - ADRs:
+    validations: { required: true }
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Paths the PR may touch. Anything else requires a comment first.
+      value: |
+        Allowed: `crates/<crate>/**`
+    validations: { required: true }
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance
+      description: Checkboxes, each verifiable by a command or a specific test name.
+      value: |
+        - [ ] `cargo test -p <crate>` passes, including tests for …
+        - [ ] `cargo clippy -p <crate> -- -D warnings` clean
+    validations: { required: true }
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope
+  - type: input
+    id: blocked_by
+    attributes:
+      label: Blocked by
+      description: "Comma-separated issue refs, e.g. #3, #7. Leave empty if none."
+      placeholder: "#3, #7"
+  - type: dropdown
+    id: owner
+    attributes:
+      label: Who can do this
+      options: ["agent-ok", "needs-human"]
+    validations: { required: true }

@@ -1,0 +1,33 @@
+[
+  {"name": "ready",        "color": "0e8a16", "description": "All blockers closed; can be claimed"},
+  {"name": "blocked",      "color": "b60205", "description": "Waiting on another issue"},
+  {"name": "agent-ok",     "color": "1d76db", "description": "An agent may take this end to end"},
+  {"name": "needs-human",  "color": "d93f0b", "description": "Design call, oracle, data or judgement needed"},
+
+  {"name": "type:task",    "color": "ededed", "description": "One PR of work"},
+  {"name": "type:epic",    "color": "5319e7", "description": "Workstream; holds tasks"},
+  {"name": "type:adr",     "color": "fbca04", "description": "Decision proposal"},
+  {"name": "type:bug",     "color": "ee0701", "description": "Something is wrong"},
+  {"name": "type:gate",    "color": "000000", "description": "Gate review"},
+
+  {"name": "size:S",       "color": "c2e0c6", "description": "Under half a day of agent work"},
+  {"name": "size:M",       "color": "fef2c0", "description": "About a day"},
+  {"name": "size:L",       "color": "f9d0c4", "description": "Too big: split before claiming"},
+
+  {"name": "crate:units",         "color": "bfdadc", "description": ""},
+  {"name": "crate:geom",          "color": "bfdadc", "description": ""},
+  {"name": "crate:schema",        "color": "bfdadc", "description": ""},
+  {"name": "crate:oplog",         "color": "bfdadc", "description": ""},
+  {"name": "crate:compiler",      "color": "bfdadc", "description": ""},
+  {"name": "crate:junction",      "color": "bfdadc", "description": ""},
+  {"name": "crate:hcm",           "color": "bfdadc", "description": ""},
+  {"name": "crate:io-landxml",    "color": "bfdadc", "description": ""},
+  {"name": "crate:adapter-sumo",  "color": "bfdadc", "description": ""},
+  {"name": "crate:cli",           "color": "bfdadc", "description": ""},
+  {"name": "crate:golden",        "color": "bfdadc", "description": ""},
+  {"name": "area:web",            "color": "bfdadc", "description": ""},
+  {"name": "area:ci",             "color": "bfdadc", "description": ""},
+  {"name": "area:docs",           "color": "bfdadc", "description": ""},
+  {"name": "area:storage",        "color": "bfdadc", "description": ""},
+  {"name": "area:jurisdiction",   "color": "bfdadc", "description": ""}
+]

@@ -1,0 +1,27 @@
+name: ADR proposal
+description: Propose a new decision or a change to an accepted one.
+labels: ["type:adr", "needs-human"]
+body:
+  - type: input
+    id: supersedes
+    attributes:
+      label: Supersedes (if any)
+      placeholder: ADR-0012
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What forced the question. Link the issue/PR where it came up.
+    validations: { required: true }
+  - type: textarea
+    id: options
+    attributes:
+      label: Options considered
+      description: Two or three, with the main trade-off of each.
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed decision
+      description: Phrased as a rule a reviewer can check a PR against.
+    validations: { required: true }

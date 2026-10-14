@@ -1,0 +1,7 @@
+# Turn on "Require review from Code Owners" in branch protection for main.
+*                                   @gatescrease-hash
+/testdata/golden/                   @gatescrease-hash
+/docs/adr/                          @gatescrease-hash
+/crates/nixie-units/src/tol.rs      @gatescrease-hash
+/AGENTS.md                          @gatescrease-hash
+/ROADMAP.md                         @gatescrease-hash

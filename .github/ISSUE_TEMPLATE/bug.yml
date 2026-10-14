@@ -1,0 +1,15 @@
+name: Bug
+description: Something compiled, validated or exported wrongly.
+labels: ["type:bug"]
+body:
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Smallest fixture or command that shows it.
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations: { required: true }

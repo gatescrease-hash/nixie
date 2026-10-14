@@ -1,0 +1,22 @@
+name: Epic
+description: A workstream inside one phase. Holds tasks; never implemented directly.
+labels: ["type:epic"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What the gate can assert once this epic is done.
+    validations: { required: true }
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Task list of issue refs. GitHub tracks completion.
+      value: |
+        - [ ] #
+    validations: { required: true }
+  - type: textarea
+    id: risks
+    attributes:
+      label: Known risks

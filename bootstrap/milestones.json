@@ -1,0 +1,7 @@
+[
+  {"title": "Phase 0 — Vertical slice", "description": "One signalized intersection: authored model → lane graph → HCM → SUMO, LandXML round-trip, plain UI. Gate 0: slice runs end to end on golden g01 and its LHT twin."},
+  {"title": "Phase 1 — Foundation", "description": "Junction generator, scaled compiler, design editor, DXF/GMNS, OSM/ORN. Gate 1: alignments round-trip via LandXML within 1 mm. Not yet ticketed (rolling wave)."},
+  {"title": "Phase 2 — Analysis", "description": "HCM at scale, UTDF, SUMO adapter, TMC import, safety surrogates. Gate 2: matches HCS/Synchro on pilot intersections. Not yet ticketed."},
+  {"title": "Phase 3 — Network modelling", "description": "AequilibraE, trip gen, mode choice, GEH, GTFS, ghost traffic. Gate 3: pilot meets GEH targets. Not yet ticketed."},
+  {"title": "Phase 4 — Native engines", "description": "GPU micro/meso, C3D and OpenRoads add-ins, live collaboration. Gate 4: native engine matches SUMO statistically. Not yet ticketed."}
+]

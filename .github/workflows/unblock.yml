@@ -1,0 +1,44 @@
+# When an issue closes, find open `blocked` issues whose "Blocked by"
+# list includes it. If every listed issue is now closed, swap the
+# `blocked` label for `ready` so agents can pick it up.
+name: unblock
+on:
+  issues:
+    types: [closed]
+permissions:
+  issues: write
+jobs:
+  unblock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const closed = context.payload.issue.number;
+            const { owner, repo } = context.repo;
+            const candidates = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: 'open', labels: 'blocked', per_page: 100,
+            });
+            for (const issue of candidates) {
+              if (issue.pull_request) continue;
+              // Works for "Blocked by: #3, #7" lines and for the issue-form
+              // section "### Blocked by" followed by refs on later lines.
+              const lines = (issue.body || '').split('\n');
+              const start = lines.findIndex(l => /blocked by/i.test(l));
+              if (start < 0) continue;
+              let text = lines[start].replace(/^#{1,6}\s/, '');
+              for (let i = start + 1; i < lines.length && !/^#{1,6}\s/.test(lines[i]); i++) text += ' ' + lines[i];
+              const refs = [...text.matchAll(/#(\d+)/g)].map(m => Number(m[1]));
+              if (!refs.length) continue;
+              if (!refs.includes(closed)) continue;
+              let allClosed = true;
+              for (const n of refs) {
+                const { data } = await github.rest.issues.get({ owner, repo, issue_number: n });
+                if (data.state !== 'closed') { allClosed = false; break; }
+              }
+              if (!allClosed) continue;
+              await github.rest.issues.removeLabel({ owner, repo, issue_number: issue.number, name: 'blocked' }).catch(() => {});
+              await github.rest.issues.addLabels({ owner, repo, issue_number: issue.number, labels: ['ready'] });
+              await github.rest.issues.createComment({ owner, repo, issue_number: issue.number,
+                body: `All blockers closed (last: #${closed}). Marked \`ready\`.` });
+            }
