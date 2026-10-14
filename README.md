@@ -1,2 +1,2 @@
-# nixie
+# Nixie
 Nixie is a tool for use by people.
