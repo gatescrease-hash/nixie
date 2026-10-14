@@ -1,0 +1,26 @@
+# Where every expected value in this fixture comes from (ADR-0020).
+# Copy the whole _template directory to testdata/golden/<name>/ and fill in
+# every field. Expected values come from a published source or a human hand
+# calculation, never from Nixie output.
+
+[fixture]
+name = "_template"                 # must equal the directory name
+description = "Layout example only; not a golden network."
+issue = 7                          # issue tracking this fixture's oracle values
+
+[sources]
+hcm_example = "HCM 7th Edition, Chapter NN, Example Problem N"   # omit if not HCM-based
+geometry = "Where the alignments and cross-sections come from"
+volumes = "Where the movement volumes come from"
+timings = "Where the signal timings come from"                    # omit if unsignalized
+licence = "Licence or permission for using the source material"
+
+[oracle]
+method = "published"               # published | hand_calculation | derived
+authored_by = "@github-handle"
+reviewed_by = "@github-handle"     # Code Owner who checked the values
+
+# One entry per intentional difference from the source.
+[[deviation]]
+what = "What differs from the source"
+why = "Why it differs"

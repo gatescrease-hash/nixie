@@ -1,0 +1,12 @@
+# Every movement keyed by (junction, approach, departure, turn), ADR-0004.
+# turn: left | through | right | u_turn
+# Numbers are SI (ADR-0011): volume in veh/s (450 veh/h = 0.125 veh/s).
+# Every number carries a tolerance *name* from nixie_units::tol, never a value.
+# Placeholder values only.
+
+[[movement]]
+junction = "J1"
+approach = "N"
+departure = "S"
+turn = "through"
+volume = { value = 0.0, tol = "TODO_TOLERANCE_NAME" }

@@ -1,0 +1,22 @@
+# HCM results per lane group, approach and intersection.
+# control_delay in s/veh. Use the published example's reported precision as
+# the tolerance, by name. Placeholder values only.
+
+[[lane_group]]
+junction = "J1"
+approach = "N"
+turns = ["through", "right"]
+control_delay = { value = 0.0, tol = "TODO_TOLERANCE_NAME" }
+volume_to_capacity = { value = 0.0, tol = "TODO_TOLERANCE_NAME" }
+los = "A"
+
+[[approach]]
+junction = "J1"
+approach = "N"
+control_delay = { value = 0.0, tol = "TODO_TOLERANCE_NAME" }
+los = "A"
+
+[[intersection]]
+junction = "J1"
+control_delay = { value = 0.0, tol = "TODO_TOLERANCE_NAME" }
+los = "A"
