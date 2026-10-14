@@ -1,0 +1,12 @@
+[package]
+name = "nixie-adapter-sumo"
+description = "SUMO export, run and result mapping."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
